@@ -12,15 +12,19 @@ const connectDB = require('./config/dbConn')
 const mongoose = require('mongoose')
 const PORT = process.env.PORT || 3500
 
-connectDB()
+console.log(process.env.NODE_ENV)
 
-app.use(logger)
+connectDB()
 
 app.use(cors(corsOptions))
 
 app.use(express.json())
 
 app.use(cookieParser())
+
+app.options('*', cors(corsOptions));
+
+app.use(logger)
 
 app.use('/', express.static(path.join(__dirname, 'public')))
 
